@@ -1,0 +1,27 @@
+{
+  "name": "graphql_school_project",
+  "version": "1.0.0",
+  "description": "application simulating a school",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrejuvland/GraphQL_School_Application.get.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrejuvland/GraphQL_School_Application.get/issues"
+  },
+  "homepage": "https://github.com/andrejuvland/GraphQL_School_Application.get#readme",
+  "dependencies": {
+    "express": "^4.18.3",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.8.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.9.2"
+  }
+}
