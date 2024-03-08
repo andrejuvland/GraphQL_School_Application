@@ -16,8 +16,11 @@ const {
 
 const studentType = require("./types/studentType")(GraphQL);
 const schoolType = require("./types/schoolType")(GraphQL);
+const teacherType = require('./types/teacherType')(GraphQL);
 const StudentService = require("./services/StudentService");
 const SchoolService = require("./services/SchoolService");
+const TeacherService = require('./services/TeacherService');
+const teacherService = new TeacherService(db);
 const studentService = new StudentService(db);
 const schoolService = new SchoolService(db);
 
@@ -37,6 +40,13 @@ const RootQuery = new GraphQLObjectType({
     },
     getSchools: {
       type: GraphQLList(schoolType),
+    },
+    getTeacher: {
+        type: teacherType,
+        args: {id: {type: new GraphQLNonNull(GraphQLID)}},
+    },
+    getTeachers: {
+        type: GraphQLList(teacherType),
     },
   }
 });
@@ -72,6 +82,20 @@ const Mutation = new GraphQLObjectType({
         id: { type: GraphQLID },
       },
     },
+    createTeacher: {
+        type: teacherType,
+        args: {
+            FirstName: {type: GraphQLString},
+            LastName: {type: GraphQLString},
+            SchoolId: {type: GraphQLID},
+        },
+    },
+    deleteTeacher: {
+        type: teacherType,
+        args: {
+            id: {type: GraphQLID},
+        },
+    }
   },
 });
 
@@ -92,6 +116,10 @@ const root = {
   createSchool: async ({ Name, Address, Description }) =>
     await schoolService.create(Name, Address, Description),
   deleteSchool: async ({ id }) => await schoolService.delete(id),
+  getTeacher: async ({id}) => await teacherService.get(id),
+  getTeachers: async () => await teacherService.getAll(),
+  createTeacher: async ({FirstName, LastName, SchoolId}) => await teacherService.create(FirstName, LastName, SchoolId),
+  deleteTeacher: async ({id}) => await teacherService.delete(id),
 };
 
 const app = express();
