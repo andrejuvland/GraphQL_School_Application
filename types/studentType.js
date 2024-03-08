@@ -6,7 +6,7 @@ module.exports = (graphql) => {
                 type: new graphql.GraphQLNonNull(graphql.GraphQLID),
             },
             SchoolId: {
-                type: new graphql.GraphQLID,
+                type: graphql.GraphQLID,
             },
             FirstName: {
                 type: graphql.GraphQLString,
